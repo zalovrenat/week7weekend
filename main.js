@@ -1,8 +1,5 @@
 import {GM_KEY,W_KEY} from './variables.js'
 
-// const GM_KEY = 'AIzaSyBuTKkWjSTUp4fthdPhjcR59Uq3Igfls5Y'
-// const W_KEY = '116eaa04c090215dcee81c9a5aeb676c'
-
 console.log("HELLO WORLD")
 
 /**
@@ -38,7 +35,6 @@ navigator.geolocation.getCurrentPosition(successCallback, errorCallback)
 const initMap = (latitude,longitude) => {
   map = new google.maps.Map(document.getElementById("map"), {
     zoom: 8,
-    // center: { lat: -34.397, lng: 150.644 },
     center: { lat: parseFloat(myLat), lng: parseFloat(myLng) },
     mapTypeControl: false,
   });
