@@ -13,6 +13,8 @@ console.log("HELLO WORLD")
 
 // Google Map API
 
+
+
 let map;
 let marker;
 let geocoder;
@@ -21,26 +23,25 @@ let response;
 let myLat = document.getElementById('lat');
 let myLng = document.getElementById('lng');
 
-myLat.addEventListener('change',(e)=>{
-  map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 8,
-    center: { lat: e.target.value, lng: myLng.value },
-    mapTypeControl: false,
-  });
-})
+// myLat.addEventListener('change',(e)=>{
+//   map = new google.maps.Map(document.getElementById("map"), {
+//     zoom: 8,
+//     center: { lat: e.target.value, lng: myLng.value },
+//     mapTypeControl: false,
+//   });
+// })
 
-myLng.addEventListener('change',(e)=>{
-  map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 8,
-    center: { lat: myLat.value, lng: e.target.value },
-    mapTypeControl: false,
-  });
-})
+// myLng.addEventListener('change',(e)=>{
+//   map = new google.maps.Map(document.getElementById("map"), {
+//     zoom: 8,
+//     center: { lat: myLat.value, lng: e.target.value },
+//     mapTypeControl: false,
+//   });
+// })
 
 const successCallback = (position) => {
-  console.log(position);
-  myLat.value = position.coords.latitude
-  myLng.value = position.coords.longitude
+  myLat = position.coords.latitude
+  myLng = position.coords.longitude
 };
 
 const errorCallback = (error) => {
@@ -50,11 +51,11 @@ const errorCallback = (error) => {
 
 navigator.geolocation.getCurrentPosition(successCallback, errorCallback)
 
-const initMap = () => {
+const initMap = (latitude,longitude) => {
   map = new google.maps.Map(document.getElementById("map"), {
     zoom: 8,
-    center: { lat: -34.397, lng: 150.644 },
-    // center: { lat: myLat, lng: myLng },
+    // center: { lat: -34.397, lng: 150.644 },
+    center: { lat: parseFloat(myLat), lng: parseFloat(myLng) },
     mapTypeControl: false,
   });
 
@@ -211,7 +212,6 @@ const initMap = () => {
   submitButton.addEventListener("click", async () => {
     const coords = await getCoord()
     const weather = await getWeather(coords.lat,coords.lng)
-    console.log(weather)
     showWeatherModal(weather)
   });
 
@@ -239,7 +239,6 @@ const geocode = async (request) => {
   marker.setMap(map);
   let stringResult = JSON.stringify(result, null, 2);
   let jsonResult = JSON.parse(stringResult)
-  console.log('location: ',jsonResult.results[0].geometry.location)
   return jsonResult.results[0].geometry.location;
 }
 
