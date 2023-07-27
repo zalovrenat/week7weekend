@@ -23,22 +23,6 @@ let response;
 let myLat = document.getElementById('lat');
 let myLng = document.getElementById('lng');
 
-// myLat.addEventListener('change',(e)=>{
-//   map = new google.maps.Map(document.getElementById("map"), {
-//     zoom: 8,
-//     center: { lat: e.target.value, lng: myLng.value },
-//     mapTypeControl: false,
-//   });
-// })
-
-// myLng.addEventListener('change',(e)=>{
-//   map = new google.maps.Map(document.getElementById("map"), {
-//     zoom: 8,
-//     center: { lat: myLat.value, lng: e.target.value },
-//     mapTypeControl: false,
-//   });
-// })
-
 const successCallback = (position) => {
   myLat = position.coords.latitude
   myLng = position.coords.longitude
